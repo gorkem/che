@@ -651,6 +651,21 @@ public interface CoreLocalizationConstant extends Messages {
 
     String search();
 
+    @Key("text.search.options.label")
+    String textSearchOptionsLabel();
+
+    @Key("text.search.mode.regularExpression.label")
+    String textSearchRegularExpressionModeLabel();
+
+    @Key("text.search.mode.fullCompliance.label")
+    String textSearchFullComplianceModeLabel();
+
+    @Key("text.search.scope.label")
+    String textSearchScopeLabel();
+
+    @Key("text.search.fileFilter.label")
+    String textSearchFileFilterLabel();
+
     @Key("text.search.content.label")
     String textSearchContentLabel();
 

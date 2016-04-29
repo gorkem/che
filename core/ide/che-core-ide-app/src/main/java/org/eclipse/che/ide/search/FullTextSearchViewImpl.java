@@ -22,6 +22,7 @@ import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
@@ -49,17 +50,21 @@ public class FullTextSearchViewImpl extends Window implements FullTextSearchView
     CoreLocalizationConstant locale;
     private final AppContext appContext;
     @UiField
-    TextBox  text;
+    TextBox     text;
     @UiField
-    TextBox  filesMask;
+    TextBox     filesMask;
     @UiField
-    CheckBox isUseFileMask;
+    CheckBox    isUseFileMask;
     @UiField
-    CheckBox isUseDirectory;
+    CheckBox    isUseDirectory;
     @UiField
-    TextBox  directory;
+    TextBox     directory;
     @UiField
-    Button   selectPathButton;
+    Button      selectPathButton;
+    @UiField
+    RadioButton regularExpression;
+    @UiField
+    RadioButton fullCompliance;
 
     Button cancelButton;
     Button acceptButton;

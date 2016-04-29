@@ -23,24 +23,9 @@
             margin: 6px;
         }
 
-        .spacingContainer {
-            margin-top: 5px;
-            margin-bottom: 8px;
-        }
-
-        .labelMargin {
-            margin: 5px 5px;
-        }
-
-        .containerPanel {
-            width: 100%;
-            height: 27px;
-        }
-
         .checkBox {
             float: left;
-            margin-left: 6px;
-            margin-top: 6px;
+            margin-top: 4px;
         }
 
         .selectDirectoryButton {
@@ -52,16 +37,31 @@
 
         .selectDirectoryButton:hover,
         .selectDirectoryButton:focus {
+            float: left;
             box-shadow: 0 0 0 1px buttonHoverBorderColor, 0 0 0 2px buttonHoverBackground;
             border-color: transparent;
         }
 
-        .floating {
+        .section {
             float: left;
+            line-height: 22px;
+            margin: 0 0 0 4px;
+        }
+
+        .sectionContent {
+            margin-left: 15px;
+            margin-bottom: 5px;
+        }
+
+        .label {
+            float: left;
+            margin-bottom: 0;
         }
 
         .inputTextBox {
+            float: left;
             margin-bottom: 2px;
+            margin-left: 6px;
         }
 
         .box {
@@ -70,33 +70,45 @@
             -webkit-box-sizing: border-box;
         }
     </ui:style>
-    <g:FlowPanel width="400px" height="135px" addStyleNames="{style.emptyBorder}" debugId="text-search-mainPanel">
-        <g:FlowPanel addStyleNames="{style.emptyBorder} {style.spacingContainer} {style.containerPanel} {style.floating}">
-            <g:Label addStyleNames="{style.labelMargin} {style.floating}" text="{locale.textSearchContentLabel}"/>
-            <g:TextBox ui:field="text" width="310px" addStyleNames="{style.box} {style.floating} {style.inputTextBox}"
+    <g:FlowPanel width="400px" addStyleNames="{style.emptyBorder}" debugId="text-search-mainPanel">
+        <g:FlowPanel addStyleNames="{style.emptyBorder} {style.section}">
+            <g:Label addStyleNames="{style.label}" text="{locale.textSearchContentLabel}"/>
+            <g:TextBox ui:field="text" width="310px" addStyleNames="{style.box} {style.inputTextBox}"
                        debugId="text-search-text"/>
         </g:FlowPanel>
 
-        <g:FlowPanel addStyleNames="{style.emptyBorder} {style.spacingContainer} {style.containerPanel} {style.floating}">
-            <g:CheckBox ui:field="isUseDirectory" addStyleNames="{style.checkBox}" value="false"/>
-            <g:Label addStyleNames="{style.labelMargin} {style.floating}" text="{locale.textSearchDirectory}"/>
-            <g:TextBox enabled="false" ui:field="directory" width="257px" addStyleNames="{style.box} {style.floating}"
+        <g:FlowPanel addStyleNames="{style.emptyBorder} {style.section}">
+            <g:Label text="{locale.textSearchOptionsLabel}" addStyleNames="{style.label}"/>
+            <g:RadioButton width="100%" ui:field="regularExpression" name="searchMode" text="{locale.textSearchRegularExpressionModeLabel}"
+                           value="false"
+                           addStyleNames="{style.sectionContent}"/>
+            <g:RadioButton width="100%" ui:field="fullCompliance" name="searchMode" text="{locale.textSearchFullComplianceModeLabel}"
+                           value="true"
+                           addStyleNames="{style.sectionContent}"/>
+        </g:FlowPanel>
+
+        <g:FlowPanel addStyleNames="{style.emptyBorder} {style.section}">
+            <g:Label text="{locale.textSearchScopeLabel}" width="100%" addStyleNames="{style.label}"/>
+            <g:CheckBox ui:field="isUseDirectory" addStyleNames="{style.checkBox} {style.sectionContent}" value="false"/>
+            <g:Label addStyleNames="{style.label}" text="{locale.textSearchDirectory}"/>
+            <g:TextBox enabled="false" ui:field="directory" width="257px" addStyleNames="{style.box}{style.inputTextBox}"
                        debugId="text-search-directory"/>
-            <g:Button enabled="false" ui:field="selectPathButton" text="..." addStyleNames="{style.floating} {style.selectDirectoryButton}"
+            <g:Button enabled="false" ui:field="selectPathButton" text="..." addStyleNames="{style.selectDirectoryButton}"
                       debugId="text-search-directory-button"/>
         </g:FlowPanel>
 
-        <g:FlowPanel addStyleNames="{style.emptyBorder} {style.spacingContainer} {style.containerPanel} {style.floating}">
-            <g:CheckBox ui:field="isUseFileMask" addStyleNames="{style.checkBox}" value="false"/>
-            <g:Label addStyleNames="{style.labelMargin} {style.floating}" text="{locale.textSearchFileMask}"/>
-            <g:TextBox enabled="false" ui:field="filesMask" width="296px" addStyleNames="{style.box} {style.floating}"
+        <g:FlowPanel addStyleNames="{style.emptyBorder} {style.section}">
+            <g:Label text="{locale.textSearchFileFilterLabel}" width="100%" addStyleNames="{style.label}"/>
+            <g:CheckBox ui:field="isUseFileMask" addStyleNames="{style.checkBox} {style.sectionContent}" value="false"/>
+            <g:Label addStyleNames="{style.label}" text="{locale.textSearchFileMask}"/>
+            <g:TextBox enabled="false" ui:field="filesMask" width="296px" addStyleNames="{style.box} {style.inputTextBox}"
                        debugId="text-search-files"/>
-            <g:Label width="100%" addStyleNames="{style.labelMargin} {res.coreCss.greyFontColor}"
+            <g:Label width="100%" addStyleNames="{res.coreCss.greyFontColor}"
                      text="{locale.navigateToFileViewFileFieldPrompt}"/>
         </g:FlowPanel>
 
-        <g:SimplePanel addStyleNames="{style.emptyBorder} {style.spacingContainer} {style.containerPanel} {style.floating}">
-            <g:Label ui:field="errLabel" width="100%" addStyleNames="{style.labelMargin} {res.coreCss.errorFont}"/>
+        <g:SimplePanel addStyleNames="{style.emptyBorder}">
+            <g:Label ui:field="errLabel" width="100%" addStyleNames="{res.coreCss.errorFont} {style.label}"/>
         </g:SimplePanel>
     </g:FlowPanel>
 </ui:UiBinder>
