@@ -17,6 +17,7 @@ Vagrant.configure(2) do |config|
   config.vm.box_download_insecure = true
   config.ssh.insert_key = false
   config.vm.network :private_network, ip: "192.168.28.30"
+  config.vm.synced_folder ".", "/home/vagrant/che-storage"
   config.vm.define "che" do |che|
   end
   config.vm.provider "virtualbox" do |vb|
@@ -69,6 +70,11 @@ Vagrant.configure(2) do |config|
     tar xvfz eclipse-che-latest.tar.gz &>/dev/null
     sudo chown -R vagrant:vagrant * &>/dev/null
     export JAVA_HOME=/usr &>/dev/null
+    export CHE_LOCAL_CONF_DIR=/home/vagrant/che-storage &>/dev/null
+
+    # exporting CHE_LOCAL_CONF_DIR, reconfiguring Che to store workspaces, projects and prefs outside the Tomcat
+    echo 'export CHE_LOCAL_CONF_DIR=/home/vagrant/che-storage' >> /home/vagrant/.bashrc
+    echo -e 'che.conf.storage=/home/vagrant/che-storage\nche.user.workspaces.storage=/home/vagrant/che-storage' > /home/vagrant/che-storage/che.properties
 
     echo "."
     echo "."
@@ -85,7 +91,7 @@ Vagrant.configure(2) do |config|
     echo vagrant | sudo -S -E -u vagrant /home/vagrant/eclipse-che-*/bin/che.sh --remote:192.168.28.30 --skip:client -g start
   SHELL
 
-  config.vm.provision "shell" do |s| 
+  config.vm.provision "shell" do |s|
   	s.inline = $script
   	s.args = [$http_proxy, $https_proxy]
   end
